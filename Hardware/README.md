@@ -11,4 +11,4 @@ If you bypass the ESP32 WiFi chip, connecting directly the Atmega328 with the US
 
 You should carefully remove the smd resistor R7, R8, R37, R38 and solder a pair of small wires between the resistor pad, side near CH330, and the resistor pad near Atmega 328. TX to RX, and RX to TX.
 
-WARNING: this entails the loss of the warranty and the disabling of all WiFi functions. The board will only continue to work via USB.
+**WARNING: this entails the loss of the warranty and the disabling of all WiFi functions. The board will only continue to work via USB.**
