@@ -22,3 +22,4 @@ You should carefully remove the smd resistor R7, R8, R37, R38 and solder a small
 
 
 
+WARNING: this entails the loss of the warranty and the disabling of all WiFi functions. The board will only continue to work via USB.
