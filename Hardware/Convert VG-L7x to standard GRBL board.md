@@ -1,3 +1,4 @@
+# Transform VG-L7x controller to a standard Grbl board
 If you need to use VG-L7x engraver with any standard GRBL compatible software you can try with this hack (at your risk).
 
 Here is a picture of a VG-L7x board that highlight connection between USB - CH330 - ESP32 - Atmega328.
