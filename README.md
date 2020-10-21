@@ -19,5 +19,5 @@ Here I want to share all the collected info to ones that want to help.
 
 # Index
 
-- [Hardware Hack](https://github.com/arkypita/Vigotech-VG-L7X/blob/main/Hardware/Convert%20VG-L7x%20to%20standard%20GRBL%20board.md)
+- [Hardware Hack](https://github.com/arkypita/Vigotech-VG-L7X/tree/main/Hardware)
 - ESP32 Firmware
