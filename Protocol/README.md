@@ -22,6 +22,13 @@ Essentially the gcode commands are sent "as-is" in the same way as grbl does, bu
 
 `<VSta:2|SBuf:5,1,0|LTC:4095>`
 
+Numbers after SBuf: count how many "ok" and how many "error" the ESP32 "see" by talking with grbl/Atmega328.
+PC software can use that numbers by translating them to the missing "ok" and "error" messages.
+
+The major issue is that this status message is not enable "by default", but should be activated by send special **encripted** commands to Vigo board.
+
+## Vigo encripted messages
+
 --- TO BE CONTINUED ---
 
 
