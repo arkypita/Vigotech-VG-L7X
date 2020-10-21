@@ -1,5 +1,5 @@
 # Welcome to the Vigotech VG-L7X wiki!
-This Wiki was created to undress Vigotech VG-L7X (WiFi) engraver protocol.
+This Wiki was created to talk about Vigotech VG-L7X (WiFi) engraver protocol.
 
 ![vgl7x](https://user-images.githubusercontent.com/8782035/96716014-c2481400-13a4-11eb-9c7f-2a90dcbe5fc6.jpg)
 
