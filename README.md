@@ -13,3 +13,4 @@ This pictures can help you understand what is the difference between a standard/
 
 
 I am trying to decode and implement some peculiarities of the VigoWork protocol to be able to make [LaserGRBL](https://github.com/arkypita/LaserGRBL) talk to the boards.
+Here I want to share all the collected info to ones that want to help.
