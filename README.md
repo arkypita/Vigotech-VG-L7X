@@ -20,4 +20,4 @@ Here I want to share all the collected info to ones that want to help.
 # Index
 
 - [Hardware Hack](https://github.com/arkypita/Vigotech-VG-L7X/tree/main/Hardware)
-- ESP32 Firmware
+- [ESP32 Firmware](https://github.com/arkypita/Vigotech-VG-L7X/tree/main/Firmware)
