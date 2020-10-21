@@ -10,9 +10,7 @@ That's all you need to know.
 
 
 
-## VigoWork protocol
-
-###### (how VigoWork and L7x board talk)
+## VigoWork protocol (how VigoWork and L7x board talk)
 
 **NOTE:** following info were deduced by intercepting and spying the USB communication between VigoWork software and its board using [eltima serial logger](www.eltima.com/products/rs232-data-logger).
 
