@@ -55,6 +55,6 @@ Board reply with a message like this:
 
 `>OPXci7m9I6qeAdz7tdcJisOO59GcMcsM3Oh:GA`
 
-You can see some of this messages I captured in file "connect.txt" contained in this folder.
+You can see some of this messages I captured in file ["connect.txt"](https://github.com/arkypita/Vigotech-VG-L7X/blob/main/Protocol/connect.txt) contained in this folder.
 
 
