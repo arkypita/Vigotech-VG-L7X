@@ -2,6 +2,7 @@
 
 If you have programming skill you can try to develop a new firmware for Vigo ESP32 that works as a "transparent bridge", ripping off away the [Vigo proprietary protocol](https://github.com/arkypita/Vigotech-VG-L7X/tree/main/Protocol), and unleashing the full power of grbl from both USB and WiFi. You can start from my [ESP8266-SerialTelnet](https://github.com/arkypita/ESP8266-SerialTelnet) sketch and make it compatible with ESP32, then add USB support (my sketch is only for WiFi part).
 
+It is possible to build a fake board to test and hack firmware without using a real VG-L7x board. [Read more](https://github.com/arkypita/Vigotech-VG-L7X/tree/main/Hardware)
 
 # Flashing ESP32 firmware
 
