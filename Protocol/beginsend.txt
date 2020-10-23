@@ -1,0 +1,76 @@
+This file contains test of sending a message that has the meaning of "begin sending job"
+This message enable a board mode that send back a report message with the status of job streaming (by the side of reception)
+Message is in format of <VSta:2|SBuf:5,1,0|LTC:4095> and it is created by ESP32 fw that talk with grbl firmware on Atmega328
+and contains in SBuf the number gcode lines received by ESP32, the number of "ok" responded by grbl, and the number of errors responded by grbl.
+
+About this file: the first line is the one I send from PC to ESP32, multiple times.
+The others next are the reply that the ESP send back each time, always to the same message sent. 
+A line of whitespace means another test with a different sent string
+
+>O:m9jMd8L5fK75df09Ly7hoxXiOebiCgKCWy3E
+>Q:Qck8UNJ6OOUeC7IOXuvdRNg:8l
+>NvRcmdXtK6MuaOB7F9Vus8R8e:gz
+>SfQ7rtY8LrNuVeA7I9U9y8ONffh1
+>MfNcodXdF6NOV9C7F9a9s8S8dv4Z
+>OfNMpdb8ILOeZOBcGubOzdOtivI2
+>RPMMptbtJrMOVeB7HOVOwtPde:m0
+>OvSsrNWtIrOuWu8MIOZOxdO8efkv
+>OPP7p8VdJrS9X99ML9ZuzdMNc:tK
+>SPO7mtVdFLP9Ye8MKOVevdQtifhw
+>NvMMqtYdIrTebuD7GeWutNONef6n
+>MPM7otXNELO9YODcLeb9tNRdef1i
+>RvMMkdVtELQeVuAcI9auv8P8j:2l
+>RfTsptU8LbQOUOC7F9X9x8Rdfv6O
+>RvNMndZ8FLQeZ9BcGOWetdOtdPM3
+>OPNsmdUNKbR9VOCcFuVOvNNNf:E/
+>MvN7l8bdLbT9Ve77JuVuydN8hPdb
+>PPPMm8X8LbNOZe8sLeUOwtT8j:IN
+>OfOclNUNIbQ9beB7I9U9sNRtef/G
+>MvP7rdW8GLReWe9MI9b9z8R8j:Ii
+>O:MMnNX8F6R9U987H9VuzNPNcfJv
+>M:NModZdHrOuae:MFObOzNNNgPu4
+>OPNMltWNLbTOWe9cE9Yut8QNjP9n
+>NfPck8WNI6MeVu8MJOW9udTdgv8:
+>MPPsp8W8HbP9Y98cGeaOy8QNcPPx
+>NvNsl8U8K6S9VuB7HebeudO8ePGb
+>SvQ7oNaNG6OuVe8MH9YetNSNdfhY
+>RfOcrdb8HbP9ZO7MGOWOzdNdg:p7
+>SfPMlNbNLLNOYO97IeY9y8ONgvup
+>MPSclNYdFrTeV98MH9Vuz8Ntj:oE
+>T:RMnNWdH6O9a9AsFebuxNRNcv7q
+>TvPMm8X8FLR9aOCMF9XOwtONgf:C
+>NPP7ltb8FrT9ae9sF9Y9sNMNfvw7
+>Q:O7ntXdGrOuU99sH9V9u8TNdfug
+>MPP7otb8J6R9a98sGeV9stS8j:oA
+>PfNMoNUNHrOObeB7FuVevtNNd:AB
+>MPOMrdW8FLNObOCsEOaew8O8gf5C
+>N:Tclda8LbNeYeDsHeVezNR8jfnt
+
+>Ofk9gsd8IKjKBahP0OGS9BrhZCPeWCBALCbyGf
+>TfO7lNVNLLSuUOCcI9W9wdN8j:5S
+>MvR7ndVdK6O9Ye97JuUuutPtd:Ny
+>TPQsrtYdFLMOUO7MGOUesdQddvWU
+>MPRcpNYtErMObOBMIeUOxdRNefmq
+>N:PcltYNL6MuYe8sL9ZOzNP8g:m1
+>MPScqNZdG6QOZe87JeautdO8gPzM
+>NfMsq8UdKrMuX9C7H9ZuudPNd::A
+>SfSMqdYdEbOOVu9cH9Vuv8MNdPRE
+>NvTsktYdHbNuXOAsJeUeudNNdfaw
+>MPNsp8b8L6O9Y97sG9Y9udONhfbI
+>MPP7oNXdK6QuVuCMK9Wuz8R8d:6U
+>TfTModXdI6P9W9D7IOb9zdSdefOm
+>N:TcotV8JbOOa99sG9Xet8QNiPQb
+>MPNcltZdFLNubu7sIeXettPNgvaI
+>S:Ocndb8FbQObe:MGOU9x8Tdj:A1
+>OfPMl8atIbNubuBMKOXewtRdcPHQ
+>OfT7m8WdKrMOXu:cKeX9tNP8jPev
+
+>S:lOgMdtGKc5Cai:P9UeAMFeb9LL859B
+>PfSMm8b8LrQeau77F9auuNM8jvqG
+>S:Qsm8XNHbS9XOB7LeVustO8d:TN
+>RfP7oNbdLLMuYuC7GeUOwNNtdPXl
+>RvM7pNbdHrOeY9AcGeYOv8Otef7b
+>OfO7rNVtJ6NOVu7MEuZettONf:dy
+>O:NMm8b8GbPOXe9MHeW9x8PtffvS
+>PPP7m8XdEbSuUOCcFOUOvtRdif8L
+>PvNMk8b8G6MOZODMEeb9stS8h:KH
