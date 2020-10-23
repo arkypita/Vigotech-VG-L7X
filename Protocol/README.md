@@ -6,6 +6,7 @@ You can use a serial logger, like [eltima serial logger](www.eltima.com/products
 You also can use a disassembler/debugger like [IDA/IDA Free](https://www.hex-rays.com/products/ida/) or [PE Explorer](http://www.heaventools.com/PE_Explorer_disassembler.htm)
 to follow disassembly VigoWork executable code and try to reverse-engineering the cripting routine.
 
+If you want you can [build your-own fake VG-L7x board](https://github.com/arkypita/Vigotech-VG-L7X/blob/main/Hardware/README.md#buid-your-own-fake-vg-l7x-controller-to-test-the-protocol) for testing, by flashing the original Firmware on a bulk ESP32 proto board, wired to Arduino Nano/UNO board with standard GRBL firmware.
 
 ## Standard GRBL protocol
 
