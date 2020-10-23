@@ -1,3 +1,12 @@
+# How I can help? What can I do?
+
+If you have cripto-analysis skill, programming skill, or hacking skill (like using a disassembler/debugger) you can help me understanding and decoding how [VigoWork and ESP32 exchange information in encripted way](https://github.com/arkypita/Vigotech-VG-L7X/tree/main/Protocol#vigo-encripted-messages).
+
+You can use a serial logger, like [eltima serial logger](www.eltima.com/products/rs232-data-logger) or any other freeware, to dump messages between VigoWork and ESP2.
+You also can use a disassembler/debugger like [IDA/IDA Free](https://www.hex-rays.com/products/ida/) or [PE Explorer](http://www.heaventools.com/PE_Explorer_disassembler.htm)
+to follow disassembly VigoWork executable code and try to reverse-engineering the cripting routine.
+
+
 ## Standard GRBL protocol
 
 GRBL protocol is public and well [documented](https://github.com/gnea/grbl/wiki/Grbl-v1.1-Interface).
@@ -29,10 +38,23 @@ The major issue is that this status message is not enable "by default", but shou
 
 ## Vigo encripted messages
 
---- TO BE CONTINUED ---
+**1. General concepts**
+- All "scrambled" messages that VigoWork and its board exchange begin with the ">" character
+- the exchange of coded messages can take place either on the initiative of the board (the board sends a message, VigoWork responds) or on the initiative of the VigoWork program (VigoWork sends a message and the board replies).
+- With the same function (connection, start of stream sending, end of stream sending) the messages exchanged are always different, but keep the same length in characters.
+- If you send a previously captured message, the board receives it validly, and responds as expected.
+- if you make some small changes to a valid message (i.e. swap some characters) the board ignores it and does not answer anything.
 
+**2. Encripted messages at connect**
 
+Each time VigoWork connect to VG-L7x board it sends a message like this:
 
+`>Qvq9fceN7KBak5hPlOBRzgzhvexBHSORPyMOVC:wKiUiai`
 
+Board reply with a message like this:
+
+`>OPXci7m9I6qeAdz7tdcJisOO59GcMcsM3Oh:GA`
+
+You can see some of this messages I captured in file "connect.txt" contained in this folder.
 
 
