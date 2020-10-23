@@ -44,6 +44,11 @@ The major issue is that this status message is not enable "by default", but shou
 - With the same function (connection, start of stream sending, end of stream sending) the messages exchanged are always different, but keep the same length in characters.
 - If you send a previously captured message, the board receives it validly, and responds as expected.
 - if you make some small changes to a valid message (i.e. swap some characters) the board ignores it and does not answer anything.
+- Vigo protocol mix "plain text" human readable command stream (like gcode and status report) and encoded messages.
+
+Here is an example of exchange of messages
+
+![example](https://user-images.githubusercontent.com/8782035/95726102-ca9fa100-0c78-11eb-9425-2039875e311c.png)
 
 **2. Encripted messages at connect**
 
@@ -56,5 +61,20 @@ Board reply with a message like this:
 `>OPXci7m9I6qeAdz7tdcJisOO59GcMcsM3Oh:GA`
 
 You can see some of this messages I captured in file ["connect.txt"](https://github.com/arkypita/Vigotech-VG-L7X/blob/main/Protocol/connect.txt) contained in this folder.
+
+
+**3. Encripted messages at board power on**
+
+If VigoWork is connected to the board, and the board is switched off then switched on, at first messages received VigoWork send a message to the board that look like this:
+
+`>Qvref7f8IqBrFKgPDqEaO5badamayK4blG`
+
+The board reply with a very long message like this:
+
+`>P:R9VeBsK6n99RzAxxjcMS/CQqHKUTmCQKrZ6abDlOBduct8gJfMP92OL7PMsM69Wz7MNMErq5sKL6L7IKF65qraHr85CKHbM7XqYjD7N7FrnKsqFbJcEKEL4apKIr7q7KLLRMYaUT4ahPtS`
+
+
+
+
 
 
