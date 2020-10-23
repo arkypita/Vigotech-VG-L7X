@@ -13,13 +13,17 @@ You should carefully remove the smd resistor R7, R8, R37, R38 and solder a pair 
 
 **WARNING: this entails the loss of the warranty and the disabling of all WiFi functions. The board will only continue to work via USB.**
 
-# Buid your own fake VG-L7x controller to test the protocol (if you dont' have a VG-L7x board)
+# Buid your own fake VG-L7x controller to test the protocol
 
 VG-L7x controller is basically an ESP32 chip wired to Atmega328 tx/rx lines. You can easly build up a firmware test environment by using a [cheap ESP32 proto board](https://s.click.aliexpress.com/e/_AcmKU1) and a common and even more cheap [Arduino UNO/Nano board](https://s.click.aliexpress.com/e/_A4UcUD).
+
+![fakeboard](https://github.com/arkypita/Vigotech-VG-L7X/blob/main/Hardware/fakeboard.jpg)
 
 You can flash the original ESP32 firmware using instruction in this page: [https://github.com/arkypita/Vigotech-VG-L7X/tree/main/Firmware](https://github.com/arkypita/Vigotech-VG-L7X/tree/main/Firmware)
 
 Be care that ESP32 is a 3.3v device (proto board has a 5v to 3.3v converter, but tx/rx lines use 3.3v and are not 5v tollerant) while arduinois usually a 5v device (but some 3.3v version exists too). Wiring between both must take care about this issue!
 
 I suggest this wiring:
+
+
 
