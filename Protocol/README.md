@@ -52,11 +52,11 @@ Here is an example of exchange of messages
 
 **2. Encripted messages at connect**
 
-Each time VigoWork connect to VG-L7x board it sends a message like this:
+Each time VigoWork open a connetction to VG-L7x board, VigoWork sends a message like this:
 
 `>Qvq9fceN7KBak5hPlOBRzgzhvexBHSORPyMOVC:wKiUiai`
 
-Board reply with a message like this:
+VG-L7x board reply with a message like this:
 
 `>OPXci7m9I6qeAdz7tdcJisOO59GcMcsM3Oh:GA`
 
@@ -69,12 +69,37 @@ If VigoWork is connected to the board, and the board is switched off then switch
 
 `>Qvref7f8IqBrFKgPDqEaO5badamayK4blG`
 
-The board reply with a very long message like this:
+VG-L7x board reply with a very long message like this:
 
 `>P:R9VeBsK6n99RzAxxjcMS/CQqHKUTmCQKrZ6abDlOBduct8gJfMP92OL7PMsM69Wz7MNMErq5sKL6L7IKF65qraHr85CKHbM7XqYjD7N7FrnKsqFbJcEKEL4apKIr7q7KLLRMYaUT4ahPtS`
 
+Captured messages of this type on file ["poweron.txt"](https://github.com/arkypita/Vigotech-VG-L7X/blob/main/Protocol/poweron.txt) contained in this folder.
 
+**4. When VigoWork start streaming a Job**
 
+This message is really very important, in fact it activates a board mode that enable the board sending the "buffer-status-report", which is indispensable to write a streaming algorithm that does not fill the reception buffer.
 
+VigoWork send: 
 
+`>O:m9jMd8L5fK75df09Ly7hoxXiOebiCgKCWy3E`
 
+VG-L7x board reply:
+
+`>Q:Qck8UNJ6OOUeC7IOXuvdRNg:8l`
+
+Captured messages of this type on file ["beginsend.txt"](https://github.com/arkypita/Vigotech-VG-L7X/blob/main/Protocol/beginsend.txt) contained in this folder.
+
+**5. When VigoWork finish streaming a Job**
+
+This message is also important, warns the board that the last message has been sent and that no more will arrive for this Job.
+VigoWork sends it at the end of the stream, after the last gcode command and after a "return home" command (G0 X0 Y0 M5).
+
+VigoWork send: 
+
+`>TflOecd8JKd5FqcP1eGiAhrBWii7rBXAjZ`
+
+VG-L7x board reply:
+
+`>O:O7q8adELicmNXMydMNd::D`
+
+Captured messages of this type on file ["endsend.txt"](https://github.com/arkypita/Vigotech-VG-L7X/blob/main/Protocol/endsend.txt) contained in this folder.
