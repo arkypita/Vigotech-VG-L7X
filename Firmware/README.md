@@ -1,3 +1,8 @@
+# How I can help? What can I do?
+
+If you have programming skill you can try to develop a new firmware for Vigo ESP32 that works as a "transparent bridge", ripping off away the [Vigo proprietary protocol](https://github.com/arkypita/Vigotech-VG-L7X/tree/main/Protocol), and unleashing the full power of grbl from both USB and WiFi. You can start from my [ESP8266-SerialTelnet](https://github.com/arkypita/ESP8266-SerialTelnet) sketch and make it compatible with ESP32, then add USB support (my sketch is only for WiFi part).
+
+
 # Flashing ESP32 firmware
 
 If you want to read/write ESP32 chip firmware i.e. to dump the original firmware, flashing a new firmware or restore the original one, there are some little stuff you need to know.
