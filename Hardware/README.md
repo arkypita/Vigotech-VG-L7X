@@ -23,7 +23,13 @@ You can flash the original ESP32 firmware using instruction in this page: [https
 
 Be care that ESP32 is a 3.3v device (proto board has a 5v to 3.3v converter, but tx/rx lines use 3.3v and are not 5v tollerant) while arduinois usually a 5v device (but some 3.3v version exists too). Wiring between both must take care about this issue!
 
-I suggest this wiring:
+I suggest this wiring.
+- Common GND
+- ESP32 Vin to Arduino 5V
+- ESP32 GPIO27 to Arduino TXD (via 100ohm resistor)
+- ESP32 GPIO33 to Arduino RXD (no resistor needed)
+
+![fakeboardwiring](https://github.com/arkypita/Vigotech-VG-L7X/blob/main/Hardware/fakeboardwiring.png)
 
 
 
