@@ -1,8 +1,5 @@
 Sorry, i don't have a lot of sample for this kind of message
 
->TflOecd8JKd5FqcP1eGiAhrBWii7rBXAjZ
->O:O7q8adELicmNXMydMNd::D
-
 
 >Mvneg7gNGai5KKc:5OGSABlxUSeMrBVgKz
 [...]
@@ -24,4 +21,21 @@ G0X0Y0M5
 Print ok--ok->62-error->0-send->62
 Grbl-Vigo:1.1f|Build:G-20170131-V3.0-20200720
 >TfScmdX8LbcspdW7t8Pddve1
+(UnlockStepper)
+
+
+G0X0Y0M5
+>TflOecd8JKd5FqcP1eGiAhrBWii7rBXAjZ
+[....]
+Print ok--ok->5107-error->0-send->5107
+Grbl-Vigo:1.1f|Build:G-20170131-V3.0-20200720
+>MPP7kˆNYdLrfcrdV7w8R8e:jV
+
+
+G0X0Y0M5
+>S:nefMh8G5f5G5d:3uKiCBmhVyj7kxZQ:P
+[....]
+Print ok--ok->601-error->0-ˆsend->602
+Grbl-Vigo:1.1f|Build:G-20170131-V3.0-20200720
+>MvPcrdYdKbi7qdZstNStg:pp
 (UnlockStepper)
