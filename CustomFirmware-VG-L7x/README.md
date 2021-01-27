@@ -14,7 +14,7 @@ Vigotech made some design choices that make this machine usable ONLY with their 
 - USB Serial connection
 - Wifi Telnet support for LaserGRBL*
 
-*Note: USB connection has priority over the Wifi connection. As soon there is a Serail USB connection the Wifi Server is not started.
+*Note: WIFI connection has priority over the USB connection. As soon there is a Telnet Wifi connection the USB connection is ignored.
 
 
 # Flash Firmware

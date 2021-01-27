@@ -42,16 +42,14 @@ void setup()
 
 void loop()
 {
-  while (Serial) {
-   ManageUSBConnected(); 
-  }
-  
   if (!initializedWifi)
     setupWifi();
   else if (server.hasClient())
     AcceptConnection();
   else if (serverClient && serverClient.connected())
     ManageWifiConnected();
+  else
+    ManageUSBConnected();
   
   httpServer.handleClient();
 }
@@ -63,7 +61,7 @@ void setupWifi() {
   httpServer.begin();
   
   delay(5000); //wait for wifi connected
-  initializedWifi = false;
+  initializedWifi = true;
 }
 
 void AcceptConnection()
