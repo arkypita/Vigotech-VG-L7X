@@ -10,8 +10,8 @@ const char* update_path = "/firmware";
 const char* update_username = "admin";
 const char* update_password = "admin";
 
-#define RXD2 33 //RX Pin to m328p
-#define TXD2 27 //TX Pin to m328p
+#define RXD2 27 //RX Pin to m328p
+#define TXD2 33 //TX Pin to m328p
 
 #define MAX_SRV_CLIENTS 1
 
@@ -25,6 +25,9 @@ WiFiManager wifiManager;
 
 void setup()
 {
+  pinMode(22, OUTPUT);
+  digitalWrite(22, HIGH);
+  
   Serial.setRxBufferSize(1024);
   Serial.begin(115200);
 
