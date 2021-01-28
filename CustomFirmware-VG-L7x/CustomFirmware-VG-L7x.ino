@@ -25,22 +25,21 @@ WiFiManager wifiManager;
 
 void setup()
 {
+  wifiManager.setDebugOutput(false);
   pinMode(22, OUTPUT);
   digitalWrite(22, HIGH);
   
   Serial.setRxBufferSize(1024);
   Serial.begin(115200);
 
-  delay(5000); //BOOT WAIT
+  delay(1000); //BOOT WAIT
 
   Serial2.setRxBufferSize(1024); 
   Serial2.begin(115200, SERIAL_8N1, RXD2, TXD2);
   
   pinMode(RESET_PIN, INPUT_PULLUP);
 
-  if(!Serial){
-    setupWifi();
-  }
+  setupWifi();
 }
 
 void loop()
@@ -74,6 +73,8 @@ void AcceptConnection()
 
   serverClient = server.available();
   serverClient.write("ESP32 Connected!\n");
+  delay(1000);
+  Serial2.write(0x18); //soft-reset grbl after connection
 }
 
 void ManageWifiConnected()
