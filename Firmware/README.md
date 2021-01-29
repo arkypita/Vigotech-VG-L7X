@@ -1,18 +1,10 @@
-# How I can help? What can I do?
-
-If you have programming skill you can try to develop a new firmware for Vigo ESP32 that works as a "transparent bridge", ripping off away the [Vigo proprietary protocol](https://github.com/arkypita/Vigotech-VG-L7X/tree/main/Protocol), and unleashing the full power of grbl from both USB and WiFi. You can start from my [ESP8266-SerialTelnet](https://github.com/arkypita/ESP8266-SerialTelnet) sketch and make it compatible with ESP32, then add USB support (my sketch is only for WiFi part).
-
-It is possible to build a fake board to test and hack firmware without using a real VG-L7x board. [Read more](https://github.com/arkypita/Vigotech-VG-L7X/tree/main/Hardware)
-
 # Flashing ESP32 firmware
 
 If you want to read/write ESP32 chip firmware i.e. to dump the original firmware, flashing a new firmware or restore the original one, there are some little stuff you need to know.
 
 First of all you should know that is not possible to program the chip directly via the USB port without a little board modification-hack. This is because the board use a CH330 usb-serial converter that has too few pins to support the extra RTS and DTR pins that most ESP32 modules use to switch the ESP32 into programming mode.
 
-Fortunately, it is easy to force programming mode by temporarily shorting IO0 ([PIN 23](https://user-images.githubusercontent.com/8782035/96240138-d523a880-0fa0-11eb-990f-f3877be84a6a.png)) to ground then resetting the ESP32. To obtain this result, simply solder a small wire between ESP32 IO0 pin and any GND pin. (see picture)
-
-
+Fortunately, it is easy to force programming mode by temporarily shorting IO0 ([PIN 23](https://user-images.githubusercontent.com/8782035/96240138-d523a880-0fa0-11eb-990f-f3877be84a6a.png)) to ground then resetting the ESP32. To obtain this result, simply solder a small wire between ESP32 GPIO0 pin and any GND pin (see picture) or hold a jumper cable on the GPIO0 pin and the other end on GND (you can also hold it simply to the metal of the SD Card slot).
 
 ![io-to-gnd](https://github.com/arkypita/Vigotech-VG-L7X/blob/main/Firmware/io0-to-gnd.jpg?raw=true)
 
@@ -86,4 +78,3 @@ esptool.py erase_flash
 If you've made a mess you can re-program the original Vigotech firmware. Vigotech does not provide it publicly/officially but you can just read your firmware and save it somewhere before you start making changes.
 
 Anyway here you can find a copy of the original firmware, copied in this way from an L7X board: [VigoEsp32 3.0 Build 20200720.bin](https://github.com/arkypita/Vigotech-VG-L7X/blob/main/Firmware/VigoEsp32%203.0%20Build%2020200720.bin)
-
