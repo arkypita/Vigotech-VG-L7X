@@ -2,11 +2,12 @@
 
 ![vgl7x](https://user-images.githubusercontent.com/8782035/96716014-c2481400-13a4-11eb-9c7f-2a90dcbe5fc6.jpg)
 
-Vigotech made some design choices that make this machine usable ONLY with their VigoWorks software. This means that if you buy this machine you will not be able to use it with other programs that use the GRBL standard (like [LaserGRBL](https://lasergrbl.com), LightBurn, T2Laser, etc).
+Vigotech made some design choices that make this machine usable ONLY with their VigoWorks software. This means that if you buy this machine you will not be able to use it with other programs that use the GRBL standard (like [LaserGRBL](https://lasergrbl.com), LightBurn, T2Laser, etc) by default.
 
 [GRBL is a standard open-source firmware](https://github.com/gnea/grbl/) for CNC and Engravers, that use a protocol that is well documented and supported by most PC software for engraving. Vigotech decided to use GBRL internally on his control board, but to communicate with the outside through a proprietary protocol, making all classic programs unusable.
 
 **This firmware** replaces the one contained in the ESP32 chip, **and enable you to use the VG-L7X laser engraver with any GRBL compatilbe software**, without any hardware hack. 
+
 You can use Arduino IDE to build and flash the CustomFirmware-VG-L7x.ino sketch you can find in this folder.
 
 
