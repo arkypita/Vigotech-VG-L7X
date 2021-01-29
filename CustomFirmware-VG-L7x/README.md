@@ -28,9 +28,6 @@ To flash the firmware you need:
 - WifiManager Library 2.03 (https://github.com/tzapu/WiFiManager.git)
 - Jumper cable
 
-To bring the ESP32 on the VG-L7X is boot mode is a bit tricky. To do so you have to bridge the GPIO0 Pin to GND. So first plug in the power adapter and the USB cable and connect it with you computer. Now hold on end of your jumper cable on the GPIO0 pin and the other end on GND (you can also hold it simply to the metal of the SD Card slot). 
-
-##### Be carefull that you only hold it on the GPIO0 pin to avoid any short circuit.
-Then while holding the jumper cable you have to press and hold the power key on the controll board. The red light should light up. At this point you can remove the bridge from GPIO0 but keep holding the power key the whole flashing process. Then you can start the upload in Arduino IDE. After flash you can release the power button and enjoy a grbl laser.
+To bring the ESP32 on the VG-L7X is boot mode is very easy. So first plug in the power adapter and the USB cable and connect it with you computer. Now hold button 2 while you press and hold the power key on the controll board. The red light should light up. At this point you can release button 2 but keep holding the power key the whole flashing process. Then you can start the upload in Arduino IDE. After flash you can release the power button and enjoy a grbl laser.
 
 Have Fun!
