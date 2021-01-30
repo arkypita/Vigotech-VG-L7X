@@ -4,6 +4,7 @@
 #include <WebServer.h>
 #include <Update.h>
 #include <WiFiManager.h>         //https://github.com/tzapu/WiFiManager min v2 to support ESP32
+#include "esp_wps.h"
 
 WebServer httpServer(80);
 const char* update_path = "/firmware";
@@ -13,8 +14,9 @@ const char* update_password = "admin";
 #define RXD2              27 //RX Pin to m328p
 #define TXD2              33 //TX Pin to m328p
 #define MAX_SRV_CLIENTS    1
-#define LONG_PRESS_TIME 5000
-#define SHORT_PRESS_TIME 50
+#define LONG_PRESS_TIME   5000
+#define SHORT_PRESS_TIME  500
+#define ESP_WPS_MODE      WPS_TYPE_PBC
 
 unsigned long buttonpressed = 0;
 unsigned long buttonreleased = 0;
@@ -31,9 +33,11 @@ WiFiClient serverClient;
 int RESET_PIN = 0; // = GPIO0 on nodeMCU
 WiFiManager wifiManager;
 
+static esp_wps_config_t config;
+
 void setup()
 {
-  wifiManager.setDebugOutput(false);
+  //wifiManager.setDebugOutput(false);
   pinMode(22, OUTPUT);
   digitalWrite(22, HIGH);
   pinMode(wpspin, INPUT_PULLUP);
@@ -41,30 +45,51 @@ void setup()
   Serial.setRxBufferSize(1024);
   Serial.begin(115200);
 
-  delay(1000); //BOOT WAIT
+  delay(500); //BOOT WAIT
 
   Serial2.setRxBufferSize(1024); 
   Serial2.begin(115200, SERIAL_8N1, RXD2, TXD2);
   
   pinMode(RESET_PIN, INPUT_PULLUP);
-
-  setupWifi();
+  
+  WiFi.begin();
+  int i = 0;
+  while (WiFi.status() != WL_CONNECTED && i < 10) {
+    delay(500);
+    Serial.print(".");
+    i++;
+  }
+ 
+  Serial.println("");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+  delay(2000);
 }
 
 void loop()
 {
+  
   switch (buttoncheck(wpspin)) {
-    case 0: // no press
+    case 0: // no press do nothing
       break;
     case 1: // short press
-      Serial.println("Short press");
+      startWPS();
+      setupWifi();
       break;
     case 2: // long press
-      Serial.println("Long press");
+      server.stop();
+      httpServer.stop();
+      WiFi.disconnect();
+      delay(50);
+      Serial.println("Starting WiFi Manager");
+      wifiManager.startConfigPortal("ESP32");
+      setupWifi();
       break;
   }
-  
-  if (server.hasClient())
+
+  if (!initializedWifi)
+    setupWifi(); 
+  else if (server.hasClient())
     AcceptConnection();
   else if (serverClient && serverClient.connected())
     ManageWifiConnected();
@@ -75,12 +100,11 @@ void loop()
 }
 
 void setupWifi() {
-  wifiManager.autoConnect("ESP32");
   server.begin();
   server.setNoDelay(true);
   httpServer.begin();
   
-  delay(5000); //wait for wifi connected
+  delay(1000); //wait for wifi connected
   initializedWifi = true;
 }
 
@@ -157,4 +181,58 @@ long buttoncheck( int buttonno){
     return 2;
   }
 }
+
+void startWPS(){
+  WiFi.onEvent(WiFiEvent);
+  WiFi.mode(WIFI_MODE_STA);
+
+  Serial.println("Starting WPS");
+
+  wpsInitConfig();
+  esp_wifi_wps_enable(&config);
+  esp_wifi_wps_start(0);
+}
+
+void wpsInitConfig(){
+  config.crypto_funcs = &g_wifi_default_wps_crypto_funcs;
+  config.wps_type = ESP_WPS_MODE;
+}
+
+void WiFiEvent(WiFiEvent_t event, system_event_info_t info){
+  switch(event){
+    case SYSTEM_EVENT_STA_START:
+      Serial.println("Station Mode Started");
+      break;
+    case SYSTEM_EVENT_STA_GOT_IP:
+      Serial.println("Connected to :" + String(WiFi.SSID()));
+      Serial.print("Got IP: ");
+      Serial.println(WiFi.localIP());
+      break;
+    case SYSTEM_EVENT_STA_DISCONNECTED:
+      Serial.println("Disconnected from station, attempting reconnection");
+      WiFi.reconnect();
+      break;
+    case SYSTEM_EVENT_STA_WPS_ER_SUCCESS:
+      Serial.println("WPS Successful, stopping WPS and connecting to: " + String(WiFi.SSID()));
+      esp_wifi_wps_disable();
+      delay(10);
+      WiFi.begin();
+      break;
+    case SYSTEM_EVENT_STA_WPS_ER_FAILED:
+      Serial.println("WPS Failed, retrying");
+      esp_wifi_wps_disable();
+      esp_wifi_wps_enable(&config);
+      esp_wifi_wps_start(0);
+      break;
+    case SYSTEM_EVENT_STA_WPS_ER_TIMEOUT:
+      Serial.println("WPS Timeout, retrying");
+      esp_wifi_wps_disable();
+      esp_wifi_wps_enable(&config);
+      esp_wifi_wps_start(0);
+      break;
+    default:
+      break;
+  }
+}
+
   
