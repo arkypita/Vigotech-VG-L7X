@@ -10,12 +10,20 @@ const char* update_path = "/firmware";
 const char* update_username = "admin";
 const char* update_password = "admin";
 
-#define RXD2 27 //RX Pin to m328p
-#define TXD2 33 //TX Pin to m328p
+#define RXD2              27 //RX Pin to m328p
+#define TXD2              33 //TX Pin to m328p
+#define MAX_SRV_CLIENTS    1
+#define LONG_PRESS_TIME 5000
+#define SHORT_PRESS_TIME 50
 
-#define MAX_SRV_CLIENTS 1
+unsigned long buttonpressed = 0;
+unsigned long buttonreleased = 0;
+
+bool buttoncurrentState = false;
+bool buttonlastState = true;
 
 bool initializedWifi = false;
+int wpspin = 32;
 
 WiFiServer server(23);
 WiFiClient serverClient;
@@ -28,6 +36,7 @@ void setup()
   wifiManager.setDebugOutput(false);
   pinMode(22, OUTPUT);
   digitalWrite(22, HIGH);
+  pinMode(wpspin, INPUT_PULLUP);
   
   Serial.setRxBufferSize(1024);
   Serial.begin(115200);
@@ -44,9 +53,18 @@ void setup()
 
 void loop()
 {
-  if (!initializedWifi)
-    setupWifi();
-  else if (server.hasClient())
+  switch (buttoncheck(wpspin)) {
+    case 0: // no press
+      break;
+    case 1: // short press
+      Serial.println("Short press");
+      break;
+    case 2: // long press
+      Serial.println("Long press");
+      break;
+  }
+  
+  if (server.hasClient())
     AcceptConnection();
   else if (serverClient && serverClient.connected())
     ManageWifiConnected();
@@ -110,3 +128,33 @@ void ManageUSBConnected()
           Serial.write(sbuf, txlen);
     }
 }
+
+long buttoncheck( int buttonno){
+  buttoncurrentState = digitalRead(buttonno); //read the button
+  
+  if (buttonlastState == HIGH && buttoncurrentState == LOW){ //button pressed
+    buttonpressed = millis();
+  }
+  else if (buttonlastState == LOW && buttoncurrentState == HIGH){ //button released
+    buttonreleased = millis();
+  }
+
+  if (buttonpressed == 0){ //do nothing if nothing changed
+    return 0;
+  }
+  
+  long pressDuration = buttonreleased - buttonpressed;
+  buttonlastState = buttoncurrentState; //save the last state
+  
+  if (pressDuration >= SHORT_PRESS_TIME && pressDuration < LONG_PRESS_TIME){
+    buttonpressed = 0;
+    buttonreleased = 0;
+    return 1; //shortpress 
+  }
+  else if (pressDuration > LONG_PRESS_TIME){ 
+    buttonpressed = 0;
+    buttonreleased = 0;
+    return 2;
+  }
+}
+  
