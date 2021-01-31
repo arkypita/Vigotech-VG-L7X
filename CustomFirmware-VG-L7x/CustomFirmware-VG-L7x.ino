@@ -26,6 +26,8 @@ bool buttonlastState = true;
 
 bool initializedWifi = false;
 int wpspin = 32;
+int button2 = 0;
+int beeper = 21;
 
 WiFiServer server(23);
 WiFiClient serverClient;
@@ -41,11 +43,17 @@ void setup()
   pinMode(22, OUTPUT);
   digitalWrite(22, HIGH);
   pinMode(wpspin, INPUT_PULLUP);
+  pinMode(button2, INPUT);
   
   Serial.setRxBufferSize(1024);
   Serial.begin(115200);
 
+  ledcSetup(0, 2000, 8);
+  ledcAttachPin(beeper, 0);
+  ledcWriteTone(0, 2000);
+
   delay(500); //BOOT WAIT
+  ledcWriteTone(0, 0);
 
   Serial2.setRxBufferSize(1024); 
   Serial2.begin(115200, SERIAL_8N1, RXD2, TXD2);
@@ -68,7 +76,6 @@ void setup()
 
 void loop()
 {
-  
   switch (buttoncheck(wpspin)) {
     case 0: // no press do nothing
       break;
@@ -84,6 +91,15 @@ void loop()
       Serial.println("Starting WiFi Manager");
       wifiManager.startConfigPortal("ESP32");
       setupWifi();
+      break;
+  }
+
+    switch (buttoncheck(button2)) {
+    case 0: // no press do nothing
+      break;
+    case 1: // short press
+      break;
+    case 2: // long press
       break;
   }
 
