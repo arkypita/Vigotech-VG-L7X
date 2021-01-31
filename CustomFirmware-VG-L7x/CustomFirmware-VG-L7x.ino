@@ -5,6 +5,9 @@
 #include <Update.h>
 #include <WiFiManager.h>         //https://github.com/tzapu/WiFiManager min v2 to support ESP32
 #include "esp_wps.h"
+//#include "soc/uart_reg.h"
+//#include "soc/uart_struct.h"
+
 
 WebServer httpServer(80);
 const char* update_path = "/firmware";
@@ -48,6 +51,9 @@ void setup()
   Serial.setRxBufferSize(1024);
   Serial.begin(115200);
 
+  //uart_dev_t * dev = (volatile uart_dev_t *)(DR_REG_UART_BASE) ;
+  //dev->conf1.rxfifo_full_thrhd = 1 ;
+
   ledcSetup(0, 2000, 8);
   ledcAttachPin(beeper, 0);
   ledcWriteTone(0, 2000);
@@ -71,7 +77,7 @@ void setup()
   Serial.println("");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
-  delay(2000);
+  delay(1000);
 }
 
 void loop()
@@ -94,15 +100,6 @@ void loop()
       break;
   }
 
-    switch (buttoncheck(button2)) {
-    case 0: // no press do nothing
-      break;
-    case 1: // short press
-      break;
-    case 2: // long press
-      break;
-  }
-
   if (!initializedWifi)
     setupWifi(); 
   else if (server.hasClient())
@@ -120,7 +117,7 @@ void setupWifi() {
   server.setNoDelay(true);
   httpServer.begin();
   
-  delay(1000); //wait for wifi connected
+  delay(500); //wait for wifi connected
   initializedWifi = true;
 }
 
@@ -131,7 +128,7 @@ void AcceptConnection()
 
   serverClient = server.available();
   serverClient.write("ESP32 Connected!\n");
-  delay(1000);
+  delay(500);
   Serial2.write(0x18); //soft-reset grbl after connection
 }
 
