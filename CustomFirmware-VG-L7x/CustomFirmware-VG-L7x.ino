@@ -5,8 +5,8 @@
 #include <Update.h>
 #include <WiFiManager.h>         //https://github.com/tzapu/WiFiManager min v2 to support ESP32
 #include "esp_wps.h"
-//#include "soc/uart_reg.h"
-//#include "soc/uart_struct.h"
+#include "soc/uart_reg.h"
+#include "soc/uart_struct.h"
 
 
 WebServer httpServer(80);
@@ -48,11 +48,13 @@ void setup()
   pinMode(wpspin, INPUT_PULLUP);
   pinMode(button2, INPUT);
   
-  Serial.setRxBufferSize(1024);
   Serial.begin(115200);
+  Serial.setRxBufferSize(1024);
 
-  //uart_dev_t * dev = (volatile uart_dev_t *)(DR_REG_UART_BASE) ;
-  //dev->conf1.rxfifo_full_thrhd = 1 ;
+  uart_dev_t * dev = (volatile uart_dev_t *)(DR_REG_UART_BASE) ;
+  dev->conf1.rxfifo_full_thrhd = 1 ;  // set the number of char received on Serial to 1 before generating an interrupt (original value is 112 and is set by esp32-hal-uart.c)
+                                      // this increase the number of interrupts but it allows to forward the char to Serial2 faster
+  dev->conf1.rx_tout_thrhd = 1;
 
   ledcSetup(0, 2000, 8);
   ledcAttachPin(beeper, 0);
@@ -60,9 +62,9 @@ void setup()
 
   delay(500); //BOOT WAIT
   ledcWriteTone(0, 0);
-
-  Serial2.setRxBufferSize(1024); 
+ 
   Serial2.begin(115200, SERIAL_8N1, RXD2, TXD2);
+  Serial2.setRxBufferSize(1024);
   
   pinMode(RESET_PIN, INPUT_PULLUP);
   
