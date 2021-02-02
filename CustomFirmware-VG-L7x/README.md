@@ -27,17 +27,17 @@ To flash the firmware you need:
 - ESP32 Hardware Library (used Node-MCU32s)
 - WifiManager Library 2.03 (https://github.com/tzapu/WiFiManager.git)
 
-To bring the ESP32 on the VG-L7X is boot mode is very easy. So first plug in the power adapter and the USB cable and connect it with you computer. Now hold button 2 while you press and hold the power key on the controll board. The red light should light up. At this point you can release button 2 but keep holding the power key the whole flashing process. Then you can start the upload in Arduino IDE. After flash you can release the power button and enjoy a grbl laser.
+To bring the ESP32 on the VG-L7X is boot mode is very easy. So first plug in the power adapter and the USB cable and connect it with you computer. Now hold the right button while you press and hold the power key on the controll board. The red light should light up. At this point you can release the right button but keep holding the power key the whole flashing process. Then you can start the upload in Arduino IDE. After flash you can release the power button and enjoy a grbl laser.
 
 Have Fun!
 
 # Get Connected
 To use the telnet conncection via WiFi you have to connect the controll board with your router. For this, the firmware has two options:
 ##### 1. WPS (Push Button)
-If your router support Push Button WPS, this is the easiest way to connect. Just start the WPS sequence on your router, then turn on the Laser, wait a few seconds until is booted completely. Then do a Button 1 short press to start the WPS. After a few seconds the Laser is connected. The Console in Laser GRABL should also print the IP now!
+If your router support Push Button WPS, this is the easiest way to connect. Just start the WPS sequence on your router, then turn on the Laser, wait a few seconds until is booted completely. Then do a middle button short press to start the WPS. After a few seconds the Laser is connected. The Console in Laser GRABL should also print the IP now!
 
 ##### 2. WiFi Manager (HotSpot)
-Another simple way to connect is using the HotSpot. For this press Button 1 for over 5 seconds and release it. Then the Laser will create a HotSpot called "ESP 32". Connect to this WiFi. Normally a pop up will come up and you can setup WiFi over the user interface. If the pop up will not appear, open your browser and enter the IP address which is printed in LaserGRBL (normally it should be 192.168.4.1). 
+Another simple way to connect is using the HotSpot. For this press the middle button for over 5 seconds and release it. Then the Laser will create a HotSpot called "ESP 32". Connect to this WiFi. Normally a pop up will come up and you can setup WiFi over the user interface. If the pop up will not appear, open your browser and enter the IP address which is printed in LaserGRBL (normally it should be 192.168.4.1). 
 
 After setting a connection reboot the Laser once and LaserGRBL (or any other Serial terminal) will print the IP address.
 
