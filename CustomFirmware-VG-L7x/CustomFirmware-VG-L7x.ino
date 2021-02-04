@@ -18,11 +18,14 @@ const char* update_password = "admin";
 #define TXD2              33 //TX Pin to m328p
 #define MAX_SRV_CLIENTS    1
 #define LONG_PRESS_TIME   5000
+#define POWER_PRESS_TIME  3000
 #define SHORT_PRESS_TIME  500
 #define ESP_WPS_MODE      WPS_TYPE_PBC
 
 unsigned long buttonpressed = 0;
 unsigned long buttonreleased = 0;
+unsigned long powerbuttonpressed = 0;
+
 
 bool buttoncurrentState = false;
 bool buttonlastState = true;
@@ -30,6 +33,7 @@ bool buttonlastState = true;
 bool initializedWifi = false;
 int wpspin = 32;
 int button2 = 0;
+int powerbutton = 36;
 int beeper = 21;
 
 WiFiServer server(23);
@@ -47,6 +51,7 @@ void setup()
   digitalWrite(22, HIGH);
   pinMode(wpspin, INPUT_PULLUP);
   pinMode(button2, INPUT);
+  pinMode(powerbutton, INPUT);
   
   Serial.begin(115200);
   Serial.setRxBufferSize(1024);
@@ -100,6 +105,23 @@ void loop()
       wifiManager.startConfigPortal("ESP32");
       setupWifi();
       break;
+  }
+
+  if (!digitalRead(powerbutton) && powerbuttonpressed == 0){
+    powerbuttonpressed = millis();
+  }
+  else if (!digitalRead(powerbutton) && powerbuttonpressed != 0){
+   if (millis() > powerbuttonpressed + POWER_PRESS_TIME){
+    ledcSetup(0, 2000, 8);
+    ledcAttachPin(beeper, 0);
+    ledcWriteTone(0, 1000);
+    delay(500); //Power off tone
+    ledcWriteTone(0, 0);
+    digitalWrite(22, LOW);
+   }
+  }
+  else if (digitalRead(powerbutton) && powerbuttonpressed != 0){
+    powerbuttonpressed = 0;
   }
 
   if (!initializedWifi)
