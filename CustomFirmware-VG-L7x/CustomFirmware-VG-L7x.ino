@@ -1,18 +1,10 @@
 #include <Arduino.h>
 #include <WiFi.h> 
 #include <DNSServer.h>
-#include <WebServer.h>
-#include <Update.h>
 #include <WiFiManager.h>         //https://github.com/tzapu/WiFiManager min v2 to support ESP32
 #include "esp_wps.h"
 #include "soc/uart_reg.h"
 #include "soc/uart_struct.h"
-
-
-WebServer httpServer(80);
-const char* update_path = "/firmware";
-const char* update_username = "admin";
-const char* update_password = "admin";
 
 #define RXD2              27 //RX Pin to m328p
 #define TXD2              33 //TX Pin to m328p
@@ -26,7 +18,6 @@ unsigned long buttonpressed = 0;
 unsigned long buttonreleased = 0;
 unsigned long powerbuttonpressed = 0;
 
-
 bool buttoncurrentState = false;
 bool buttonlastState = true;
 
@@ -39,7 +30,6 @@ int beeper = 21;
 WiFiServer server(23);
 WiFiClient serverClient;
 
-int RESET_PIN = 0; // = GPIO0 on nodeMCU
 WiFiManager wifiManager;
 
 static esp_wps_config_t config;
@@ -71,8 +61,6 @@ void setup()
   Serial2.begin(115200, SERIAL_8N1, RXD2, TXD2);
   Serial2.setRxBufferSize(1024);
   
-  pinMode(RESET_PIN, INPUT_PULLUP);
-  
   WiFi.begin();
   int i = 0;
   while (WiFi.status() != WL_CONNECTED && i < 10) {
@@ -80,10 +68,15 @@ void setup()
     Serial.print(".");
     i++;
   }
- 
-  Serial.println("");
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
+  if (WiFi.status() == WL_CONNECTED){
+    Serial.println("");
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
+  }
+  else {
+    Serial.println("");
+    Serial.println("WiFi not connected");
+  }
   delay(1000);
 }
 
@@ -98,7 +91,6 @@ void loop()
       break;
     case 2: // long press
       server.stop();
-      httpServer.stop();
       WiFi.disconnect();
       delay(50);
       Serial.println("Starting WiFi Manager");
@@ -133,14 +125,11 @@ void loop()
     ManageWifiConnected();
   else
     ManageUSBConnected();
-  
-  httpServer.handleClient();
 }
 
 void setupWifi() {
   server.begin();
   server.setNoDelay(true);
-  httpServer.begin();
   
   delay(500); //wait for wifi connected
   initializedWifi = true;
