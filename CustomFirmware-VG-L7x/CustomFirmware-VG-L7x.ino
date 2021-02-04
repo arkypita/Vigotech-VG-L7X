@@ -112,11 +112,12 @@ void loop()
   }
   else if (!digitalRead(powerbutton) && powerbuttonpressed != 0){
    if (millis() > powerbuttonpressed + POWER_PRESS_TIME){
-    ledcSetup(0, 2000, 8);
-    ledcAttachPin(beeper, 0);
-    ledcWriteTone(0, 1000);
-    delay(500); //Power off tone
-    ledcWriteTone(0, 0);
+      if (millis() > powerbuttonpressed + POWER_PRESS_TIME && millis() <= powerbuttonpressed + POWER_PRESS_TIME + 1000){
+        ledcWriteTone(0, 1000);
+      }
+      else {
+        ledcWriteTone(0, 0);
+      }
     digitalWrite(22, LOW);
    }
   }
