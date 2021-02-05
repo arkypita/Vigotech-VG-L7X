@@ -47,9 +47,8 @@ void setup()
   Serial.setRxBufferSize(1024);
 
   uart_dev_t * dev = (volatile uart_dev_t *)(DR_REG_UART_BASE) ;
-  dev->conf1.rxfifo_full_thrhd = 1 ;  // set the number of char received on Serial to 1 before generating an interrupt (original value is 112 and is set by esp32-hal-uart.c)
+  dev->conf1.rxfifo_full_thrhd = 56 ;  // set the number of char received on Serial to 56 before generating an interrupt (original value is 112 and is set by esp32-hal-uart.c)
                                       // this increase the number of interrupts but it allows to forward the char to Serial2 faster
-  dev->conf1.rx_tout_thrhd = 1;
 
   ledcSetup(0, 2000, 8);
   ledcAttachPin(beeper, 0);
@@ -77,7 +76,11 @@ void setup()
     Serial.println("");
     Serial.println("WiFi not connected");
   }
-  delay(1000);
+  delay(500);
+
+  while ( Serial2.available() )  Serial2.read() ; // clear input buffer which can contains messages sent by GRBL in reply to noise captured before Serial port was initialised.
+  Serial2.write(0x18) ; // send a soft reset
+  delay(100);
 }
 
 void loop()
@@ -165,19 +168,22 @@ void ManageWifiConnected()
 
 void ManageUSBConnected()
 {    
+   while (Serial.available()){
     size_t rxlen = Serial.available();
     if (rxlen > 0) {
       uint8_t sbuf[rxlen];
       Serial.readBytes(sbuf, rxlen);
           Serial2.write(sbuf, rxlen);
     }
-  
+   }
+   while (Serial2.available()){
     size_t txlen = Serial2.available();
     if (txlen > 0) {
       uint8_t sbuf[txlen];
       Serial2.readBytes(sbuf, txlen);
           Serial.write(sbuf, txlen);
-    }
+    } 
+  }
 }
 
 long buttoncheck( int buttonno){
