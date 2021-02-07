@@ -15,6 +15,8 @@ This pictures can help you understand what is the difference between a standard/
 To use @smoki3 firmware hack follow this [instruction](https://github.com/arkypita/Vigotech-VG-L7X/tree/main/CustomFirmware-VG-L7x)
 Alternatively you can also use a hardware hack.
 
+WARNING: with firmware hack and hardware hack you will lose the ability to use the VigoWork program!
+
 # Index
 
 - [Firmware Hack](https://github.com/arkypita/Vigotech-VG-L7X/tree/main/CustomFirmware-VG-L7x) by @smoki3
