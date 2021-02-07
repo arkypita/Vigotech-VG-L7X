@@ -1,14 +1,10 @@
 # Flashing ESP32 firmware
 
-If you want to read/write ESP32 chip firmware i.e. to dump the original firmware, flashing a new firmware or restore the original one, there are some little stuff you need to know.
+If you want to read/write ESP32 chip firmware i.e. to dump the original firmware, flashing a new firmware or restore the original one, you should put ESP32 in "boot mode"
 
-First of all you should know that is not possible to program the chip directly via the USB port without a little board modification-hack. This is because the board use a CH330 usb-serial converter that has too few pins to support the extra RTS and DTR pins that most ESP32 modules use to switch the ESP32 into programming mode.
+To bring the ESP32 on the VG-L7X is boot mode is very easy. So first plug in the power adapter and the USB cable and connect it with you computer. Now hold the right button while you press and hold the power key on the controll board. The red light should light up. At this point you can release the right button but keep holding the power key the whole flashing process.
 
-Fortunately, it is easy to force programming mode by temporarily shorting IO0 ([PIN 23](https://user-images.githubusercontent.com/8782035/96240138-d523a880-0fa0-11eb-990f-f3877be84a6a.png)) to ground then resetting the ESP32. To obtain this result, simply solder a small wire between ESP32 GPIO0 pin and any GND pin (see picture) or hold a jumper cable on the GPIO0 pin and the other end on GND (you can also hold it simply to the metal of the SD Card slot).
-
-![io-to-gnd](https://github.com/arkypita/Vigotech-VG-L7X/blob/main/Firmware/io0-to-gnd.jpg?raw=true)
-
-
+After flash you can release the power button.
 
 ## Installing esptool
 
