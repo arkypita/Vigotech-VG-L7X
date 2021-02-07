@@ -4,7 +4,7 @@ If you want to read/write ESP32 chip firmware i.e. to dump the original firmware
 
 To bring the ESP32 on the VG-L7X is boot mode is very easy. So first plug in the power adapter and the USB cable and connect it with you computer. Now hold the right button while you press and hold the power key on the controll board. The red light should light up. At this point you can release the right button but keep holding the power key the whole flashing process.
 
-After flash you can release the power button.
+After flash read or write is completed, you can release the power button.
 
 ## Installing esptool
 
