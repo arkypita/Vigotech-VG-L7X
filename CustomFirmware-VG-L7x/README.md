@@ -21,7 +21,12 @@ You can use Arduino IDE to build and flash the CustomFirmware-VG-L7x.ino sketch 
 *Note: WIFI connection has priority over the USB connection. As soon there is a Telnet Wifi connection the USB connection is ignored.
 
 # Flash Firmware
+##### WARNING: With this custom firmware you will lose the ability to use the VigoWork program!
+
+To backup you existing firmware read through this: https://github.com/arkypita/Vigotech-VG-L7X/tree/main/Firmware
+
 ##### No soldering is need for this mod!
+
 To flash the firmware you need:
 - Arduino IDE
 - ESP32 Hardware Library (used Node-MCU32s) (https://github.com/espressif/arduino-esp32/blob/master/docs/arduino-ide/boards_manager.md)
