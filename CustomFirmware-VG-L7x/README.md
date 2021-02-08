@@ -23,7 +23,7 @@ You can use Arduino IDE to build and flash the CustomFirmware-VG-L7x.ino sketch 
 # Flash Firmware
 ##### WARNING: With this custom firmware you will lose the ability to use the VigoWork program!
 
-To backup you existing firmware read through this: https://github.com/arkypita/Vigotech-VG-L7X/tree/main/Firmware
+To backup your existing firmware read through this: https://github.com/arkypita/Vigotech-VG-L7X/tree/main/Firmware
 
 ##### No soldering is need for this mod!
 
